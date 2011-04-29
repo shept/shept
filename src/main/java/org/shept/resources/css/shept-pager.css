@@ -1,0 +1,64 @@
+
+div.shept_pager_sort, 
+div.shept_pager_nosort {
+	padding: 2px;
+}
+
+
+div.shept_pager_sort a, 
+div.shept_pager_nosort a {
+	cursor: pointer;
+}
+
+div.shept_pager_sort input, 
+div.shept_pager_nosort input {
+	padding-left: 5px;
+}
+
+ 
+div.shept_pager_navi a {
+	vertical-align: super;
+	font-size: x-small;
+}
+
+a.shept_pager_navi_thisPage {
+	padding-left: 5px;
+	cursor: default; 
+	font-weight: bold;
+}
+
+a.shept_pager_navi_page {
+	padding-left: 5px;
+	cursor: pointer; 
+}
+
+.shept_pager_navi_pageSubmit {
+	display: none;
+}
+
+.shept_pager_navi_more:after {
+	content: "...";
+}
+
+.shept_pager_navi_nextPage,
+.shept_pager_navi_nextPage_disabled {
+	padding-left: 5px;
+}
+
+
+div.shept_pager_size, 
+div.shept_pager_size * {
+	font-size: x-small;
+}
+
+div.shept_pager_size input {
+	display: none;
+}
+
+div.shept_pager_size label {
+	padding-right: 5px;
+}
+
+div.shept_pager_info {
+	font-size: x-small;
+}

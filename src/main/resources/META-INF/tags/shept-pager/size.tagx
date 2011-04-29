@@ -1,0 +1,104 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form" 
+	version="2.0" 
+>
+
+
+	<jsp:directive.attribute name="pageHolder" 
+		description="Contains the name of the pageHolder element. If absent the commandPath is used.
+		In a shept context the commandPath is a request scoped variable that is updated for each segment 
+		allowing for multiple pageHolders on the same page"
+	/>
+	
+	<jsp:directive.attribute name="cssClass"
+		description="The class for the stylesheet to use" 
+	/>
+	
+	<jsp:directive.attribute name="label"
+		description="optional label may preceed the drop-down select box"  
+	/>
+
+	<jsp:directive.attribute name="sizeList"
+		description="A comma separated list of valid choices for the page size.
+			A default list is provided" 
+	/>
+
+	<jsp:directive.attribute name="insertMissingPageSize"
+		description="If the actual page size is not in the sizelist, then pageSize
+		will be added to sizeList if sizeList is sorted in ascending order.
+			default is true"
+		type="java.lang.Boolean" 
+	/>
+	
+	<!--   
+	This tag shows a drop down box to resize the shown page list.
+	
+	Used resources:
+	CSS-Styles: 'shept_pager_size' if not passed another cssClass
+				
+	Images:		no images
+	-->
+
+	<c:if test="${empty sizeList}">
+		<c:set var="sizeList" value="5,10,15,25,50,100,200" />
+	</c:if>
+	
+	<c:if test="${empty insertMissingPageSize}">
+		<c:set var="insertMissingPageSize" value="true" />
+	</c:if>
+	
+<spring:bind path="${not empty pageHolder ? pageHolder : commandPath}">
+	<c:set var="pageHolderObject" value="${status.value}" />
+
+	<fmt:bundle basename="org.shept.resources.i18n.messages" >
+		<fmt:message key="PageableList.size" var="txtSize" />
+		<spring:message var="txtSize" code="PageableList.size" text="${txtSize}" />
+	</fmt:bundle>
+
+	<div class="${not empty cssClass ? cssClass : 'shept_pager_size'}" >
+		<label for="${status.expression}.pageSize" >
+			<c:out value="${empty label ? txtSize : label}" />   
+		</label>
+		<select  
+			name="${status.expression}.pageSize" 
+			id="${status.expression}.pageSize" 
+			onChange="document.getElementById('${status.expression}.pageResize').click()" >
+			<c:forTokens items="${sizeList}" delims="," var="curPagSize">
+				<c:choose>
+					<c:when test="${curPagSize lt pageHolderObject.pageSize}">
+						<option value="${curPagSize}" >
+							<c:out value="${curPagSize}" />
+						</option>
+					</c:when>
+					<c:when test="${curPagSize eq pageHolderObject.pageSize}">
+						<c:set var="insertMissingPageSize" value="false" />
+						<option value="${curPagSize}" selected="selected" >
+							<c:out value="${curPagSize}" />
+						</option>
+					</c:when>
+					<c:when test="${curPagSize gt pageHolderObject.pageSize}">
+						<c:if test="${insertMissingPageSize}" >
+							<option value="${pageHolderObject.pageSize}" selected="selected" >
+								<c:out value="${pageHolderObject.pageSize}" />
+							</option>
+							<c:set var="insertMissingPageSize" value="false" />
+						</c:if>
+						<option value="${curPagSize}" >
+							<c:out value="${curPagSize}" />
+						</option>
+					</c:when>
+				</c:choose>
+			</c:forTokens>
+		</select>
+		<input type="submit" value="Resize"  
+			id="${status.expression}.pageResize" name="${status.expression}.pageResize" />
+	</div>
+	
+</spring:bind>
+
+</jsp:root>

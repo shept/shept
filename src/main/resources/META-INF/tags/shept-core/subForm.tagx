@@ -1,0 +1,59 @@
+<jsp:root 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+	<jsp:directive.attribute name="headerCode" rtexprvalue="true" />
+	<jsp:directive.attribute name="infoMessage" rtexprvalue="true" />
+
+	<c:if test="${empty isSheptIncluded}">
+		<c:set var="isSheptIncluded" value="true" scope="request"/>
+		<link rel="stylesheet" type="text/css" href="includes/shept.css" />
+	</c:if>
+
+	<c:if test="${empty isSheptFormIncluded}">
+		<c:set var="isSheptFormIncluded" value="true" scope="request"/>
+		<link rel="stylesheet" type="text/css" href="includes/shept-form.css" />
+	</c:if>
+
+	<div id="${commandPathId}" class="sheptSubForm" >
+	  <fieldset>
+		<legend>
+			<spring:message code="${headerCode}" />
+			<c:if test="${childIndex gt 0}">
+				<c:choose>
+					<c:when test="${empty componentProperties['minimized']}">
+						<input type="image" src="${images}/subForm/arrow_up.png"  
+							name="${commandPath}.submitPropertySet_minimized::true" 
+						/> 
+					</c:when>
+					<c:otherwise>
+						<input type="image" src="${images}/subForm/arrow_down.png"
+							name="${commandPath}.submitPropertyReset_minimized" 
+						/> 
+					</c:otherwise>
+				</c:choose>
+				<input type="image" src="${images}/subForm/close.png"  
+					name="${commandPath}.submitClose_true" /> 
+			</c:if>
+		</legend>
+		<div class="sheptFormInfo">
+			<c:choose>
+				<c:when test="${not empty infoMessage}" >
+					${infoMessage}
+				</c:when>
+				<c:otherwise >
+					${componentProperties['info']}
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<c:if test="${empty componentProperties['minimized']}">
+			<div class="sheptFormBody">
+				<jsp:doBody />
+			</div>
+		</c:if>
+	  </fieldset>
+	</div>
+</jsp:root>

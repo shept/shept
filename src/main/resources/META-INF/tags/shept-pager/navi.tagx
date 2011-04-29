@@ -1,0 +1,154 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+	<jsp:directive.attribute name="pageHolder" 
+		description="Contains the name of the pageHolder element. If absent the commandPath is used.
+		In a shept context the commandPath is a request scoped variable that is updated for each segment 
+		allowing for multiple pageHolders on the same page"
+	/>
+	<jsp:directive.attribute name="cssClass" 
+		description="stylesheet class for unsorted column. Default name is 'shept_pager_navi' "
+	/>
+	<jsp:directive.attribute name="imageDir"
+		description="Path to the direcotry containing images. Default is contextPath/images/pager "
+	/>
+	<jsp:directive.attribute name="imageExt"
+		description="Filename Extension (suffix) of image files. Default is 'png' "
+	/>
+
+	<!--   
+	This tag enables page navigation with a pageHolder as an entity of the current command object.
+	Paging work as expected as navigation works in all directions. Paging to the end of the pageHolder
+	moves a big step ahead depending on the current pageHolder settings. The pageHolder then will
+	reload more rows from the underlying dataSource if necessary.
+	
+	Used resources:
+	
+	CSS-Styles: shept_pager_navi or overridden by cssClass
+				shept_pager_navi_firstPage, shept_pager_navi_firstPage_disabled
+				shept_pager_navi_nextPage, shept_pager_navi_nextPage_disabled
+				shept_pager_navi_previousPage, shept_pager_navi_previousPage_disabled
+				shept_pager_navi_lastPage, shept_pager_navi_lastPage_disabled
+				shept_pager_navi_page,
+				shept_pager_navi_thisPage,
+				shept_pager_navi_pageSubmit,
+				shept_pager_navi_more
+				
+	Images:		'start_disabled.png', 'start.png', 'next_disabled.png', 'next.png'
+				'previous_disabled.png', 'previous.png', 'last_disabled.png', 'last.png'
+				Default extension is *.png which can be changed by 'imageExt'-attribute
+				Default image dir is contextPath/images/pager and can be changed by 'imageDir'-attribute
+
+	Message (I18): PageableList.firstPage, PageableList.lastPage, PageableList.nextPage, PageableList.previousPage
+	-->
+
+
+<spring:bind path="${not empty pageHolder ? pageHolder : commandPath}">
+	<c:set var="pageHolderObject" value="${status.value}" />
+
+	<c:if test="${empty imageDir}">
+		<c:set var="imageDir" value="${pageContext.request.contextPath}/images/pager" />
+	</c:if>
+
+	<c:if test="${empty imageExt}">
+		<c:set var="imageExt" value="png" />
+	</c:if>
+
+	<fmt:bundle basename="org.shept.resources.i18n.messages" >
+
+		<fmt:message key="PageableList.firstPage" var="pager_firstPage" />
+		<spring:message var="pager_firstPage" code="PageableList.firstPage" text="${pager_firstPage}" />
+
+		<fmt:message key="PageableList.lastPage" var="pager_lastPage" />
+		<spring:message var="pager_lastPage" code="PageableList.lastPage" text="${pager_lastPage}" />
+
+		<fmt:message key="PageableList.nextPage" var="pager_nextPage" />
+		<spring:message var="pager_nextPage" code="PageableList.nextPage" text="${pager_nextPage}" />
+
+		<fmt:message key="PageableList.previousPage" var="pager_previousPage" />
+		<spring:message var="pager_previousPage" code="PageableList.previousPage" text="${pager_previousPage}" />
+	</fmt:bundle>
+
+<div class="${not empty cssClass ? cssClass : 'shept_pager_navi'}">
+	<c:if test="${pageHolderObject.pageCount > 1 or not pageHolderObject.eol}">
+
+		<!-- Set the icons for backward navigation -->
+		<c:choose>
+			<c:when test="${pageHolderObject.page eq 0}">
+				<img class="shept_pager_navi_firstPage_disabled" 
+					src="${imageDir}/start_disabled.${imageExt}" 
+					alt="${pager_firstPage}" title="${pager_firstPage}" />
+				<img class="shept_pager_navi_previousPage_disabled"
+					src="${imageDir}/previous_disabled.${imageExt}" 
+					alt="${pager_previousPage}" title="${pager_previousPage}" />
+			</c:when>
+			<c:otherwise>
+				<input type="image" 
+					class="shept_pager_navi_firstPage"
+					src="${imageDir}/start.${imageExt}" name="${status.expression}.pageFirst_" 
+					alt="${pager_firstPage}" title="${pager_firstPage}" />
+				<input type="image" 
+					class="shept_pager_navi_previousPage"
+					src="${imageDir}/previous.${imageExt}" name="${status.expression}.pagePrevious_" 
+					alt="${pager_previousPage}" title="${pager_previousPage}" />
+			</c:otherwise>
+		</c:choose>
+
+		<!-- Set each page with number and input tag for page submission -->
+		<c:forEach 
+			begin="${pageHolderObject.firstLinkedPage}" 
+			end="${pageHolderObject.lastLinkedPage}" 
+			var="curPage">
+			<a onclick="document.getElementById('${status.expression}.pageSelect_${curPage}').click()" 
+				class="${curPage eq pageHolderObject.page ? 'shept_pager_navi_thisPage' : 'shept_pager_navi_page'} " >
+				 <c:out value="${curPage + 1}" />
+			</a>
+		</c:forEach>
+
+		<c:forEach 
+			begin="${pageHolderObject.firstLinkedPage}" 
+			end="${pageHolderObject.lastLinkedPage}" 
+			var="curPage">
+			<input type="submit" 
+				class="shept_pager_navi_pageSubmit"  
+				value="${curPage}"
+				name="${status.expression}.pageSelect_${curPage}" 
+				id="${status.expression}.pageSelect_${curPage}" />
+		</c:forEach>
+
+		<!-- Set the icons for forward navigation -->
+		<c:choose>
+			<c:when test="${pageHolderObject.pageCount -1 eq pageHolderObject.page and pageHolderObject.eol}">
+				<img class="shept_pager_navi_nextPage_disabled" 
+					src="${imageDir}/next_disabled.${imageExt}" 
+					alt="${pager_nextPage}" title="${pager_nextPage}" />
+				<img class="shept_pager_navi_lastPage_disabled"  
+					src="${imageDir}/end_disabled.${imageExt}" 
+					alt="${pager_lastPage}" title="${pager_lastPage}" />
+			</c:when>
+			<c:otherwise>
+				<c:if test="${not pageHolderObject.eol}">
+					<span class="shept_pager_navi_more">
+						<!-- insert dots or something else via css -->
+					</span>
+				</c:if>
+				<input type="image"
+					class="shept_pager_navi_nextPage"  
+					src="${imageDir}/next.${imageExt}" name="${status.expression}.pageNext_" 
+					alt="${pager_nextPage}" title="${pager_nextPage}" />
+				<input type="image" 
+					class="shept_pager_navi_lastPage"  
+					src="${imageDir}/end.${imageExt}" name="${status.expression}.pageLast_" 
+					alt="${pager_lastPage}" title="${pager_lastPage}" />
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+</div>
+
+</spring:bind>
+</jsp:root>

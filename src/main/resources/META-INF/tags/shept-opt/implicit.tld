@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" 
+	version="2.1">
+
+	<tlib-version>2.0</tlib-version>
+	<short-name>SheptTaglib</short-name>
+	<uri>http://www.shept.org/tags/shept-opt</uri>
+	
+	<tag-file>
+		<description>
+			Use blurInput to mark the default input for new rows as faded
+		</description>
+		<name>blurInput</name>
+		<path>/META-INF/tags/shept-opt/blurInput.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Open a new 'chained' segment that will be initialized from the current row
+		</description>
+		<name>chainRow</name>
+		<path>/META-INF/tags/shept-opt/chainRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Confirm deletion of current row
+		</description>
+		<name>confirmDeleteRow</name>
+		<path>/META-INF/tags/shept-opt/confirmDeleteRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Show a row status icon to mark transient (=new) and deleted rows
+		</description>
+		<name>iconRow</name>
+		<path>/META-INF/tags/shept-opt/iconRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Default form submission
+		</description>
+		<name>submission</name>
+		<path>/META-INF/tags/shept-opt/submission.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Default search submission
+		</description>
+		<name>submitSearch</name>
+		<path>/META-INF/tags/shept-opt/submitSearch.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Wizard template to include wizard buttons at the bottom of all page elements
+		</description>
+		<name>wizard</name>
+		<path>/META-INF/tags/shept-opt/wizard.tagx</path>
+	</tag-file>
+</taglib>

@@ -1,0 +1,35 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:internal="http://www.shept.org/tags/internal"
+	version="2.0"
+>
+
+	<spring:message var="txtLabel" code="Persist.delete" />
+	<spring:message var="buttonOkLabel" code="Persist.yes" />
+	<spring:message var="buttonCancelLabel" code="Persist.no" />
+
+	<internal:includeJavaScript />
+
+	<c:choose>
+		<c:when test="${not isTransient and not isDeleted}" >
+			
+	 	  <img
+			src="${images}/persist/delete.png"
+			alt="${txtLabel}" title="${txtLabel}" 
+			style="cursor: pointer;"
+			onclick="openConfirmDialog('${txtLabel}',
+				this, 
+				'${commandPath}.submitDelete_${rowStatus.index}', 
+				'${buttonOkLabel}', '${buttonCancelLabel}');"
+		  /> 
+		</c:when>
+		<c:otherwise>
+			<img src="${images}/persist/blank.png" alt="" />
+ 		</c:otherwise>
+	</c:choose>
+	
+	
+</jsp:root>

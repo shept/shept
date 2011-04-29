@@ -1,0 +1,82 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+	<jsp:directive.attribute name="pageHolder" 
+		description="Contains the name of the pageHolder element. If absent the commandPath is used.
+		In a shept context the commandPath is a request scoped variable that is updated for each segment 
+		allowing for multiple pageHolders on the same page"
+	/>
+	<jsp:directive.attribute name="cssClass"
+		description="The class for the stylesheet to use" 
+	/>
+	
+	<jsp:directive.attribute name="imageDir"
+		description="Path to the direcotry containing images. Default is contextPath/images/pager "
+	/>
+
+<!-- 
+	Optional info tag which shows the time/date when the pageHolder was last updated
+	
+	Used resources:
+	CSS-Styles: 'shept_pager_info' if not passed another cssClass
+				
+	Images:		information.png
+-->
+
+<spring:bind path="${not empty pageHolder ? pageHolder : commandPath}">
+	<c:set var="pageHolderObject" value="${status.value}" />
+
+	<c:if test="${empty imageDir}">
+		<c:set var="imageDir" value="${pageContext.request.contextPath}/images/pager" />
+	</c:if>
+
+	<c:if test="${empty imageExt}">
+		<c:set var="imageExt" value="png" />
+	</c:if>
+
+
+	<div class="${not empty cssClass ? cssClass : 'shept_pager_info'}" >
+
+		<!--  use dateStyle="short" and type="both" if a date should also be shown -->
+		<fmt:formatDate var="txtInfoDate" value="${pageHolderObject.refreshDate}" type="time" timeStyle="medium" />
+
+		<fmt:bundle basename="org.shept.resources.i18n.messages" >
+			<fmt:message key="PageableList.refresh" var="txtLabel" />
+			<fmt:message key="PageableList.pages" var="txtInfoPages" >
+				<fmt:param value="${pageHolderObject.page + 1}" />
+				<fmt:param value="${pageHolderObject.pageCount}" />
+				<fmt:param value="${pageHolderObject.eol ? '' : '+'}" />
+			</fmt:message>
+			<fmt:message key="PageableList.records" var="txtInfoRecords">
+				<fmt:param value="${pageHolderObject.firstElementOnPage + 1}" />
+				<fmt:param value="${pageHolderObject.lastElementOnPage + 1}" />
+				<fmt:param value="${pageHolderObject.nrOfElements}" />
+				<fmt:param value="${pageHolderObject.eol ? '' : '+'}" />
+			</fmt:message>
+		</fmt:bundle>
+	
+		<spring:message var="txtInfoDateLabel" code="PageableList.refresh" text="${txtLabel}" />
+
+		<spring:message var="txtInfoPages" code="PageableList.pages" text="${txtInfoPages}"
+			arguments="${pageHolderObject.page + 1}, ${pageHolderObject.pageCount}, ${pageHolderObject.eol ? '' : '+'}" >
+		</spring:message>
+
+		<spring:message var="txtInfoRecords" code="PageableList.records" text="${txtInfoRecords}"
+			arguments="${pageHolderObject.firstElementOnPage + 1},
+			 	${pageHolderObject.lastElementOnPage + 1},
+		 		${pageHolderObject.nrOfElements},
+			 	${pageHolderObject.eol ? '' : '+'} " >
+		</spring:message>
+	
+		<c:set var="txtInfo" value="${txtInfoDateLabel}: ${txtInfoDate} | ${txtInfoPages} | ${txtInfoRecords} "/>
+		<img src="${imageDir}/information.${imageExt}" alt="${txtInfo}" title="${txtInfo}" />
+
+	</div>
+</spring:bind>
+
+</jsp:root>

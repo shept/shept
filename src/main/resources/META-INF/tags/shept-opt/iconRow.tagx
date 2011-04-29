@@ -1,0 +1,20 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+	<c:choose>
+		<c:when test="${isTransient}">
+			<img src="${images}/persist/bullet_star.png" />
+		</c:when>
+		<c:when test="${isDeleted}">
+			<img src="${images}/persist/cross.png" />
+		</c:when>
+		<c:otherwise>
+			<img src="${images}/persist/blank.png" />							
+		</c:otherwise>
+	</c:choose>
+	
+</jsp:root>

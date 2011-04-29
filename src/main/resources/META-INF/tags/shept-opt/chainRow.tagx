@@ -1,0 +1,44 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	version="2.0"
+>
+	<jsp:directive.attribute name="chainName" required="true" rtexprvalue="true"
+		description="The default name of the chain"
+	/>
+	
+	<jsp:directive.attribute name="defaultText" rtexprvalue="true"
+		description="The default text for the chain symbol"
+	/>
+	
+	<jsp:directive.attribute name="code"
+		description="messageCode to resolve the hover text on the chain symbol - if absent 'defaultText' - attribute is used "
+	/>
+
+	<jsp:directive.attribute name="image" rtexprvalue="true"
+		description="Image file name to display an image. "
+	/>
+	
+	<c:if test="${empty image}" >
+		<c:set var="image" value="chain/link_go.png" />
+	</c:if>
+	<c:set var="chainImage" value="${images}/${image}" />
+	
+	<c:choose>
+		<c:when test="${not isTransient and not isDeleted}">
+			<spring:message var="txtLabel" code="${code}" text="${defaultText}" />
+			<input
+				type="image" src="${chainImage}"
+				alt="${txtLabel}" title="${txtLabel}"
+				name="${commandPath}.submitChain_${chainName}::${rowStatus.index}" 
+			/>
+		</c:when>
+		<c:otherwise>
+			<img src="${images}/chain/blank.png" alt="" />
+		</c:otherwise>
+	</c:choose>
+	
+</jsp:root>

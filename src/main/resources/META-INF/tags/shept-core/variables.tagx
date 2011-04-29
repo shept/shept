@@ -1,0 +1,50 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+
+	<!-- commandName is usually different for all the forms -->	
+	<c:if test="${empty commandName}">
+		<c:set var="commandName" value="command" scope="request" />
+	</c:if>
+
+	<!-- commandRoot usually isn't different for subForms -->
+	<c:if test="${empty commandRoot}">
+		<c:set var="commandRoot" value="children" scope="request" />
+	</c:if>
+
+	<spring:bind path="${commandName}.${commandRoot}" >
+		<c:set var="isChildIndexValid" value="${childIndex lt fn:length(status.value)}" scope="request" />
+	</spring:bind>
+
+	<c:if test="${empty commandLength}" >	
+		<spring:bind path="${commandName}.${commandRoot}" >
+			<c:set var="commandLength" value="${fn:length(status.value) -1}" scope="request" />
+		</spring:bind>
+	</c:if>
+
+	<c:if test="${isChildIndexValid}">
+		<c:set var="commandPath" value="${commandRoot}[${childIndex}]" scope="request" />
+		<c:set var="commandPathId" value="${commandRoot}${childIndex}" scope="request" />
+
+		<spring:bind path="${commandName}.${commandPath}.tagName" >
+			<c:set var="subFormName" value="${status.value}" scope="request" />
+		</spring:bind>
+
+		<spring:bind path="${commandName}.${commandPath}.properties" >
+			<c:set var="componentProperties" value="${status.value}" scope="request" />
+		</spring:bind>
+
+		<!-- This is the commandPath to be used in tags -->
+		<c:set var="commandPath" value="${commandPath}.command" scope="request" />
+		
+		<spring:bind path="${commandName}.${commandPath}" >
+			<c:set var="subCommand" value="${status.value}" scope="request" />
+		</spring:bind>
+	</c:if>
+	 
+</jsp:root>

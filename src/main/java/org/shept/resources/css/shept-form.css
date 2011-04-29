@@ -1,0 +1,70 @@
+
+
+.sheptSubForm fieldset {
+	border-color: #9EB1F7;
+	border-style: dotted;
+	border-width: 2px;
+	clear:both;
+	display:inline;
+	font-size:100%;
+	margin-bottom:15px;
+	padding: 5px;
+	width:auto;
+}
+
+.sheptSubForm fieldset legend {
+	background-color:#EDEFF5;
+	font-size: 130%;
+	padding: 0 10px 0 10px;
+}
+
+.sheptSubForm fieldset legend input {
+	margin-left:	4px;
+}
+
+.sheptFormSubmission {
+	background-color: #E3E6F1;
+	margin: 2px;
+	padding: 15px;
+}
+
+.sheptFilter {
+	background-color: #E3E6F1;
+	overflow: hidden;
+}
+
+.sheptFilter table {
+	float: left;
+}
+
+
+.sheptSubmitSave {
+	float:	left;
+}
+
+.sheptSubmitRefresh {
+	float: left;
+	margin: 10px 0 0 10px;
+}
+
+.sheptSubmitFilter {
+	float:	left;
+}
+
+.sheptSubmitFilterReset {
+	float:	left;
+}
+
+.sheptClear {
+	clear:	both;
+}
+
+.sheptFloatRight {
+	float: right;
+}
+
+.sheptFormInfo {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	font-size: 0.9em;
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" 
+	version="2.1">
+
+	<tlib-version>2.0</tlib-version>
+	<short-name>SheptTaglib</short-name>
+	<uri>http://www.shept.org/tags/shept-core</uri>
+	
+	<tag-file>
+		<description>
+			Confirm deletion of current row
+		</description>
+		<name>confirmDialog</name>
+		<path>/META-INF/tags/shept-core/confirmDialog.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include debug information on current page output
+		</description>
+		<name>debug</name>
+		<path>/META-INF/tags/shept-core/debug.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Show page error
+		</description>
+		<name>error</name>
+		<path>/META-INF/tags/shept-core/error.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Show multiple errors
+		</description>
+		<name>errors</name>
+		<path>/META-INF/tags/shept-core/errors.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include a segment filter
+		</description>
+		<name>filter</name>
+		<path>/META-INF/tags/shept-core/filter.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include a simple form
+		</description>
+		<name>form</name>
+		<path>/META-INF/tags/shept-core/form.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Form wrapper will dynamically include all required segments
+		</description>
+		<name>formWrapper</name>
+		<path>/META-INF/tags/shept-core/formWrapper.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include JavaScripts to be used for shept
+		</description>
+		<name>includeJavaScript</name>
+		<path>/META-INF/tags/shept-core/includeJavaScript.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include rowVariables to be used in tables
+		</description>
+		<name>rowVariables</name>
+		<path>/META-INF/tags/shept-core/rowVariables.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Embed your custom segments within subForms for outlining the contours of each segment
+		</description>
+		<name>subForm</name>
+		<path>/META-INF/tags/shept-core/subForm.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Table
+		</description>
+		<name>table</name>
+		<path>/META-INF/tags/shept-core/table.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include the table navigation-size and information elements usually
+			shown at the bottom of a table
+		</description>
+		<name>tableFooter</name>
+		<path>/META-INF/tags/shept-core/tableFooter.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include form variables for use throughout a request
+		</description>
+		<name>variables</name>
+		<path>/META-INF/tags/shept-core/variables.tagx</path>
+	</tag-file>
+</taglib>

@@ -1,0 +1,124 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+	<jsp:directive.attribute name="sortCol" required="true"
+		description="Name of the column in the form backing object (business model) for sorting"
+	/>
+	<jsp:directive.attribute name="pageHolder" 
+		description="Contains the name of the pageHolder element. If absent the commandPath is used.
+		In a shept context the commandPath is a request scoped variable that is updated for each segment 
+		allowing for multiple pageHolders on the same page"
+	/>
+	<jsp:directive.attribute name="code"
+		description="MessageCode to resolve the i18 title, if absent 'title'-attribute is used "
+	/>
+	<jsp:directive.attribute name="title"
+		description="The column title. Use code instead for i18 name resolution. If both 'title' and
+		'code' are absent, the name of the sortCol is used instead"
+	/>
+	<jsp:directive.attribute name="imageDir"
+		description="Path to the direcotry containing images. Default is contextPath/images/pager "
+	/>
+	<jsp:directive.attribute name="imageExt"
+		description="Filename Extension (suffix) of image files. Default is 'png' "
+	/>
+	<jsp:directive.attribute name="imageSort"
+		description="Image name w/o extension. Default is 'arrows_sort'. Images with trailing '_up' and '_down' are
+		also needed to show unsorted behaviour ('arrows_sort' and ascending 'arrows_sort_up' and descending 'arrows_sort_down' "
+	/>
+	<jsp:directive.attribute name="cssClass" 
+		description="stylesheet class for unsorted column. Default name is 'shept_pager_sort' "
+	/>
+	<jsp:directive.attribute name="cssClassSorted"
+		description="stylesheet class for sorted column Default name is 'shept_pager_nosort' "
+	/>
+	<jsp:directive.attribute name="disabled" type="java.lang.Boolean"
+		description="Disable sorting behaviour when set. Columns acts as a standard column
+		Default is false (=sorting enabled)"
+	/>
+
+	<!--   
+	This tag enables a &#60;th&#62;ColumnHeader&#60;/th&#62; working together with a pageHolder
+	The column Header contains column Symbol SortCol and the hader title
+	It has 3 images (one for not or unknown sorting and images for ascending and descending)
+	
+	Used resources:
+	CSS-Styles: 'shept_pager_sort' to mark a column as the current sorting column
+				'shept_pager_nosort' for all other columns
+				styles are not required
+				
+	Images:		'arrows_sort' for inactive columns
+				'arrwos_sort_up' for ascending sorting
+				'arrows_sort_down' for descending sorting
+				Default extension is *.png which can be changed by 'imageExt'-attribute
+				Default image name can be changed by 'imageSort'-attribute
+				Default image dir is contextPath/images/pager and can be changed by 'imageDir'-attribute
+	Message (I18): none
+	-->
+
+	<spring:bind path="${not empty pageHolder ? pageHolder : commandPath}">
+		<c:set var="pageHolderObject" value="${status.value}" />
+
+		<c:if test="${empty imageDir}">
+			<c:set var="imageDir" value="${pageContext.request.contextPath}/images/pager" />
+		</c:if>
+
+		<c:if test="${empty imageSort}">
+			<c:set var="imageSort" value="arrows_sort" />
+		</c:if>
+
+		<c:if test="${empty imageExt}">
+			<c:set var="imageExt" value="png" />
+		</c:if>
+
+		<spring:message var="sortTitle" code="${code}"
+			text="${not empty title ? title : sortCol }"
+		/>
+
+		<c:choose>
+			<c:when test="${(pageHolderObject.sort.property eq sortCol) and not disabled }" >
+				<c:set var="cssClassVar" value="${not empty cssClassSorted ? cssClassSorted : 'shept_pager_sort'} " />
+			</c:when>
+			<c:otherwise>
+				<c:set var="cssClassVar" value="${not empty cssClass ? cssClass : 'shept_pager_nosort'} " />
+			</c:otherwise>
+		</c:choose>
+
+		<div class="${cssClassVar}">
+		  <c:set var="img" value="${imageSort}.${imageExt}" />
+		  <c:set var="sort" value="${status.expression}.pageSortAsc_" />
+
+		  <c:if test="${pageHolderObject.sort.property eq sortCol}">
+			<c:choose>
+				<c:when test="${pageHolderObject.sort.ascending}">
+					<c:set var="img" value="${imageSort}_up.${imageExt}" />
+					<c:set var="sort" value="${status.expression}.pageSortDesc_" />
+				</c:when>
+				<c:otherwise>
+					<c:set var="img" value="${imageSort}_down.${imageExt}" />
+					<c:set var="sort" value="${status.expression}.pageSortAsc_" />
+				</c:otherwise>
+			</c:choose>
+		  </c:if>
+		  	<c:choose>
+		  		<c:when test="${disabled}" >
+					<c:out value="${sortTitle}" />  			
+		  		</c:when>
+		  		<c:otherwise>
+				  <a onclick="document.getElementById('${sort}${sortCol}').click()" >
+					<c:out value="${sortTitle}" />
+					<input type="image" src="${imageDir}/${img}" 
+					name="${sort}${sortCol}" id="${sort}${sortCol}" />
+		  		</a>
+		  		</c:otherwise>
+		  	</c:choose>
+		</div>
+	</spring:bind>
+
+</jsp:root>

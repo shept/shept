@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" >
+
+	<context:annotation-config />
+	
+	<!--  Templates to be overridden / enhanced / configured in your project setup -->
+
+	<bean id="sheptPageHolderFactoryTemplate" abstract="true" 
+		class="org.shept.util.PageHolderFactory" >
+	</bean>
+
+<!-- define a pageHolderFactory bean in your project if you need a different listHolderClass
+	<bean id="pageHolderFactory" parent="sheptPageHolderFactoryTemplate" >
+		<property name="listHolderClass" value="org.shept.org.springframework.beans.support.FilteredListHolder.class" />
+	</bean>
+ -->
+ 
+	<bean id="sheptLocaleFormatResolverTemplate" abstract="true"
+		class="org.shept.org.springframework.web.servlet.mvc.support.ConfigurableLocaleDependentFormatResolver" />
+	
+	<bean id="sheptDefaultFormCache" class="org.shept.org.springframework.web.servlet.mvc.formcache.LastModifiedSessionFormCache" />
+		
+	<bean id="sheptControllerTemplate" abstract="true" scope="prototype" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.SheptController" >
+		<property name="delegates" >
+			<list>
+			  <ref bean="sheptPagedListComponent"/>
+			  <ref bean="sheptFilteredListComponent"/>
+			  <ref bean="sheptListPersistenceComponent"/>
+			  <ref bean="sheptEntityPersistenceComponent" />
+			  <ref bean="sheptChainingComponent" />
+			  <ref bean="sheptPropertyEditorComponent" />
+			  <ref bean="sheptFormControlComponent" />
+			</list>
+		</property>
+		<property name="synchronizeOnSession" value="true" />
+		<property name="webBindingInitializer" >
+			<bean parent="sheptBindingInitializerTemplate" />
+		</property>
+		<property name="formView" value="defaultForm" />
+		<property name="formCache" ref="sheptDefaultFormCache" />
+		<property name="cacheSeconds" value="0" />	<!-- disable browser cache for all shept controllers -->
+	</bean>
+
+	<bean id="sheptMappingTemplate" abstract="true">
+		<property name="interceptors">
+		<list>
+			<bean class="org.shept.org.springframework.web.servlet.mvc.interceptors.FormCompletionInterceptor" />
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		</list>
+		</property>
+	</bean>	
+
+	<!-- Predefinitions and component handlers -->
+
+	<bean id="shCopyTemplate" class="org.shept.util.JarResourceCopier" abstract="true" />
+	 	
+	<bean id="sheptPagedListComponent" class="org.shept.org.springframework.web.servlet.mvc.delegation.component.PagedListComponent">
+		<property name="resources">
+			<array>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/images/pager/" />
+					<property name="targetPath" value="images/pager/" />
+				</bean>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/css/" />
+					<property name="targetPath" value="includes/" />
+					<property name="files" value="shept.css, shept-form.css, shept-formEdit.css, shept-pager.css, shept-table.css" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="sheptFilteredListComponent" class="org.shept.org.springframework.web.servlet.mvc.delegation.component.FilteredListComponent">
+		<property name="resources">
+			<array>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/images/" />
+					<property name="targetPath" value="images/filter/" />
+					<property name="files" value="pix32x32/magnifier.png, pix16x16/magnifier_zoom_out.png" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="sheptChainingComponent" class="org.shept.org.springframework.web.servlet.mvc.delegation.component.ChainingComponent" >
+		<property name="resources">
+			<array>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/images/" />
+					<property name="targetPath" value="images/chain/" />
+					<property name="files" value="pix16x16/blank.png, pix16x16/link_go.png" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="sheptPersistenceComponentTemplate" abstract="true" >
+		<property name="resources">
+			<array>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/images/" />
+					<property name="targetPath" value="images/persist/" />
+					<property name="files" value="pix16x16/blank.png, 
+						pix32x32/accept.png, pix16x16/refresh.png, 
+						pix16x16/bullet_star.png, pix16x16/cross.png, 
+						pix16x16/delete.png, pix16x16/exclamation.png" />
+				</bean>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/js/" />
+					<property name="targetPath" value="includes/js/" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<bean id="sheptListPersistenceComponent" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.component.ListPersistenceComponent"
+		parent="sheptPersistenceComponentTemplate" />
+
+	<bean id="sheptEntityPersistenceComponent" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.component.EntityPersistenceComponent"
+		parent="sheptPersistenceComponentTemplate" >
+		<property name="resources">
+			<array merge="true">
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/css/" />
+					<property name="targetPath" value="includes/" />
+					<property name="files" value="shept.css, shept-form.css, shept-formEdit.css" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+	
+	<bean id="sheptPropertyEditorComponent" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.component.PropertyEditorComponent" >
+	</bean>
+
+	<bean id="sheptFormControlComponent" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.component.FormControlComponent" >
+		<property name="resources">
+			<array>
+				<bean parent="shCopyTemplate">
+					<property name="sourcePath" value="org/shept/resources/images/subForm/" />
+					<property name="targetPath" value="images/subForm/" />
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+
+	<!-- abstract (=template) definitions for use in segments.xml and chains.xml and ...-servlet.xml -->
+
+	<bean id="sheptBindingInitializerTemplate" abstract="true" 
+		class="org.shept.org.springframework.web.bind.support.DefaultWebBindingInitializer" />
+	
+	<bean id="sheptBindingComponentInitializerTemplate" abstract="true"  
+		class="org.shept.org.springframework.web.bind.support.DefaultComponentBindingInitializer" />
+
+	<bean id="sheptTransactionTemplate" abstract="true" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.ComponentTransaction" />
+
+	<bean id="sheptSegmentTemplate" abstract="true"
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.configuration.SegmentConfiguration" >
+	</bean>
+	
+	<bean id="sheptDataGridTemplate" abstract="true"
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.configuration.DataGridConfiguration" >
+		<property name="pageSize" value="5" />
+	</bean>
+
+	<bean id="sheptTargetTemplate" abstract="true" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.configuration.TargetConfiguration" />
+		
+	<bean id="sheptChainTemplate" abstract="true" 
+		class="org.shept.org.springframework.web.servlet.mvc.delegation.configuration.ChainConfiguration" />
+		
+	<bean id="sheptInfoItemTemplate" abstract="true" 
+		class="org.shept.org.springframework.web.servlet.mvc.support.InfoItem" />
+
+	
+</beans>

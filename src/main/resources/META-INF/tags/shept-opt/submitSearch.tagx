@@ -1,0 +1,33 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	version="2.0"
+>
+
+	<div class="sheptFormSubmission">
+		<div class="sheptSubmitFilter" >
+			<spring:message var="txtLabel" code="Filter.find" />
+ 			<input
+				type="image"
+				src="${images}/filter/magnifier.png"
+				title="${txtLabel}"
+				name="${commandPath}.submitFilter_dummy"
+				id="${commandPathId}_submitFilter"
+			/>
+		</div>
+		<div class="sheptSubmitFilterReset" >
+			<spring:message var="txtLabel" code="Filter.reset" />
+ 			<input
+				type="image"
+				src="${images}/filter/magnifier_zoom_out.png"
+				title="${txtLabel}"
+				name="${commandPath}.submitFilterReset_dummy"
+				id="${commandPathId}_submitFilterReset"
+			/>
+		</div>
+	 </div>
+
+</jsp:root>

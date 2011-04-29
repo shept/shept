@@ -1,0 +1,87 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:pager="http://www.shept.org/tags/pager"
+	xmlns:shept-core="http://www.shept.org/tags/shept-core"
+	version="2.0"
+>
+
+	<jsp:directive.attribute name="tabHeader" fragment="true" required="true" />
+	<jsp:directive.attribute name="tabRow" fragment="true" required="true" />
+	<jsp:directive.attribute name="tabSubmit" fragment="true" />
+
+	<jsp:directive.attribute name="cssClass" required="false"/>
+
+	<c:if test="${empty isSheptTableIncluded}">
+		<c:set var="isSheptTableIncluded" value="true" scope="request"/>
+		<link rel="stylesheet" type="text/css" href="includes/shept-table.css" />
+	</c:if>
+
+	<c:if test="${empty isSheptPagerIncluded}">
+		<c:set var="isSheptPagerIncluded" value="true" scope="request"/>
+		<link rel="stylesheet" type="text/css" href="includes/shept-pager.css" />
+	</c:if>
+
+	<!--  defaultName is used for fading new row input -->
+	<!--  The .name - part may vary depending on your source model object -->
+	<spring:bind path="${commandName}.${commandPath}.newModelTemplate" >
+		<c:set var="rowTemplate" value="${status.value}" scope="request" />	
+	</spring:bind>	
+
+	<div>
+	  <table class="sheptTable ${cssClass}" >
+	  	<thead>
+			<jsp:invoke fragment="tabHeader" />
+		</thead>
+		
+		<!-- list variables -->
+		<spring:bind path="${commandName}.${commandPath}.source" >
+			<c:set var="listItems" value="${status.value}" />	
+		</spring:bind>
+		<spring:bind path="${commandName}.${commandPath}.firstElementOnPage" >
+			<c:set var="startIndex" value="${status.value}" />	
+		</spring:bind>
+		<spring:bind path="${commandName}.${commandPath}.lastElementOnPage">
+			<c:set var="endIndex" value="${status.value}" />	
+		</spring:bind>
+
+		<tbody>
+		<!-- Data rows -->
+		<c:forEach
+			var="rowObject"
+			items="${listItems}"
+			begin="${startIndex}"
+			end="${endIndex}"
+			varStatus="rowStatus"
+		>
+			<!-- make rowVariables available to all included pages -->
+			<shept-core:rowVariables rowObject="${rowObject}" rowStatus="${rowStatus}" >
+				<!-- switch to the rowObjects path to allow for simple bind names -->
+				<spring:nestedPath path="${rowPath}">
+					<jsp:invoke fragment="tabRow" />
+ 				</spring:nestedPath>
+			</shept-core:rowVariables>
+		</c:forEach>
+		</tbody>
+	  </table>
+	  
+	  <div>
+  		<shept-core:tableFooter >
+  			<jsp:doBody />
+		</shept-core:tableFooter>
+	  </div>
+	  <div class="sheptClear">
+	  	<!-- comment -->
+	  </div>
+	  <c:if test="${not empty tabSubmit}" >
+	  	<div>
+			<jsp:invoke fragment="tabSubmit" />
+		</div>
+	  </c:if>
+	</div>
+
+	<c:remove var="rowTemplate" scope="request" />
+	  
+</jsp:root>

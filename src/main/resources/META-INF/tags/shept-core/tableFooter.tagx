@@ -1,0 +1,25 @@
+<jsp:root
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:shept-pager="http://www.shept.org/tags/shept-pager"
+	version="2.0"
+>
+	<jsp:directive.attribute name="cssClass" required="false"/>
+
+	<div class="sheptTableFooter ${cssClass}" >
+		<div>
+			<div class="sheptTableNavi">
+				<shept-pager:navi />
+			</div>
+			<div class="sheptTableInfo">
+				<shept-pager:info />
+			</div>
+			<div class="sheptTableSize">
+				<shept-pager:size />
+			</div>
+			<div class="sheptClear" >
+			</div>
+		</div>
+	</div>
+
+</jsp:root>

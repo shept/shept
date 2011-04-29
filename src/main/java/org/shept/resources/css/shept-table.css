@@ -1,0 +1,32 @@
+
+.sheptTableHeader th { 
+	background-color: #cdd6f6; 
+}
+
+.sheptTableRow td { 
+	background-color: #e3e6f1;
+}
+
+.sheptTableRow.sheptTableNewRow td {
+	background-color: #FFFFCC; 
+}
+
+.sheptTableFooter { 
+	background-color: #e3e6f1; 
+}
+
+.sheptTableFooter div {
+	background-color: #e3e6f1; 
+}
+
+.sheptTableNavi {
+	float: left;
+}
+
+.sheptTableInfo {
+	float: right;
+}
+
+.sheptTableSize {
+	float: right;
+}
