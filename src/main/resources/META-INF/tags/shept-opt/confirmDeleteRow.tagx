@@ -3,7 +3,7 @@
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:internal="http://www.shept.org/tags/internal"
+	xmlns:shept-core="http://www.shept.org/tags/shept-core"
 	version="2.0"
 >
 
@@ -11,7 +11,7 @@
 	<spring:message var="buttonOkLabel" code="Persist.yes" />
 	<spring:message var="buttonCancelLabel" code="Persist.no" />
 
-	<internal:includeJavaScript />
+	<shept-core:includeJavaScript />
 
 	<c:choose>
 		<c:when test="${not isTransient and not isDeleted}" >

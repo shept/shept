@@ -5,14 +5,14 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:internal="http://www.shept.org/tags/internal"
+	xmlns:shept-core="http://www.shept.org/tags/shept-core"
 	version="2.0"
 >
 	<jsp:directive.attribute name="path" required="true"
 		description="Name of the form input model attribute where blur should take place"
 	/>
 
-	<internal:includeJavaScript />
+	<shept-core:includeJavaScript />
 	
 	<c:set var="defaultText" value="" />
 	<c:if test="${not empty rowTemplate}" >

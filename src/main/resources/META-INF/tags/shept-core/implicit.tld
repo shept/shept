@@ -7,7 +7,7 @@
 	version="2.1">
 
 	<tlib-version>2.0</tlib-version>
-	<short-name>SheptTaglib</short-name>
+	<short-name>SheptCoreTaglib</short-name>
 	<uri>http://www.shept.org/tags/shept-core</uri>
 	
 	<tag-file>
