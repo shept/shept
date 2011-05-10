@@ -48,11 +48,12 @@
 
 	</developers>
 
-<!-- 
+
 	<scm>
-		<url>/</url>
+		<url>scm:git:git://github.com/shept/shept.git</url>
 	</scm>
 
+<!-- 
 	<distributionManagement>
 		<repository>
 			<id>sonatype-nexus-staging</id>
