@@ -152,6 +152,9 @@ public class ModelUtils {
 				newModel = ReflectionUtils.invokeMethod(mth, model);
 			} catch (Exception ex) {
 				// ignore any exception during cloning
+				if (logger.isDebugEnabled()) {
+					logger.debug("Cloning " + model + " failure", ex);					
+				}
 			}
 		}
 		return newModel;
