@@ -14,7 +14,7 @@ were famous for building enterprise applications in a rapid prototyping fashion.
 
 Read more in the [Feature documentation][features]
 
-Look at the [Online examples][]
+Look at the [Online examples][demos]
 
 Shept implementation basics
 ===========================
@@ -38,11 +38,12 @@ Shept has been developed in a couple of web projects since 2008. While early ver
 shept has been made available in early 2011 as a separate library under Apache 2 licence.
 
 Shept is short for
-* *S*pring
-* *H*ibernate
-* *E*clipse
-* *P*ostgres
-* *T*omcat
+
+* **S**pring
+* **H**ibernate
+* **E**clipse
+* **P**ostgres
+* **T**omcat
 
 While Eclipse, Postgres and Tomcat are not mandatory parts we are referring to those environments in the documentation and the examples.
 
