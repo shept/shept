@@ -48,5 +48,5 @@ Shept is short for
 While Eclipse, Postgres and Tomcat are not mandatory parts we are referring to those environments in the documentation and the examples.
 
 [features]: http://shept.org/docs/Shept/Features
-[demos]: http://shept.org/docs/Demos
-[getting started]: http://shept.org/docs/Demo1
+[demos]: http://shept.org/docs/Demos/
+[getting started]: http://shept.org/docs/Demo1/
