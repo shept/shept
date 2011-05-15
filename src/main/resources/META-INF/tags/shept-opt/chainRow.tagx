@@ -22,13 +22,16 @@
 		description="Image file name to display an image. "
 	/>
 	
+	<jsp:directive.attribute name="enabled" rtexprvalue="true" 
+		description="true when chain should be enabled ignoring isTransient() and isDeleted()"/>
+
 	<c:if test="${empty image}" >
 		<c:set var="image" value="chain/link_go.png" />
 	</c:if>
 	<c:set var="chainImage" value="${images}/${image}" />
 	
 	<c:choose>
-		<c:when test="${not isTransient and not isDeleted}">
+		<c:when test="${not isTransient and not isDeleted or (not empty enabled and enabled) }">
 			<spring:message var="txtLabel" code="${code}" text="${defaultText}" />
 			<input
 				type="image" src="${chainImage}"

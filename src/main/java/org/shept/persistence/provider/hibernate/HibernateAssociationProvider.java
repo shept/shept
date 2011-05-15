@@ -17,6 +17,7 @@
 package org.shept.persistence.provider.hibernate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class HibernateAssociationProvider extends AbstractHibernateListProvider 
 	 * org.shept.persistence.provider.AbstractScrollingListProvider#loadListFirst
 	 * ()
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public List<?> loadListFirst() {
 		ReloadableAssociation ass = (ReloadableAssociation) getFilterDefinition();
@@ -52,12 +53,15 @@ public class HibernateAssociationProvider extends AbstractHibernateListProvider 
 		// ... to get rid of this dreaded and random LazyLoadingExceptions when opening the link ...
 		
 		Object idxObj = DaoUtils.getIdValue((HibernateDaoSupport) this.dao, model);
-		if (idxObj != null) {
-			model = getHibernateTemplate().load(model.getClass(), (Serializable) idxObj);
+		if (idxObj == null) {
+			// can't load from database so we have nothing here ...
+			// we should not use existing transient objects from the cache !
+			return new ArrayList();
 		}
+		
+		model = getHibernateTemplate().load(model.getClass(), (Serializable) idxObj);
 
-		Object res = ReflectionUtils.invokeMethod(ass.getAssociationMethod(),
-				model);
+		Object res = ReflectionUtils.invokeMethod(ass.getAssociationMethod(),model);
 		if (!(res instanceof List)) {
 			throw new DataLoadException(
 					"Could not provide the requested data '"

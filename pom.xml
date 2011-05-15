@@ -52,7 +52,14 @@
 	<scm>
 		<url>http://github.com/shept/shept</url>
 		<connection>scm:git:git://github.com/shept/shept.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/shept/shept.git</developerConnection>
 	</scm>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/shept/shept/issues/</url>
+	</issueManagement>
+	
 	
 <!-- 
 	<distributionManagement>
@@ -105,7 +112,7 @@
 				<executions>
 					<execution>
 						<id>attach-sources</id>
-						<phase>verify</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar-no-fork</goal>
 						</goals>
@@ -123,7 +130,7 @@
 				<executions>
 					<execution>
 						<id>attach-javadoc</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
