@@ -1,5 +1,3 @@
-About Shept
-===========
 Shept provides a tiny add-on to spring-mvc for form-based web applications that allow extendible forms.
 Instead of writing complete forms with a fixed job you'll write snippets that compose to forms
 and that can be rearranged in a simple fashion.
