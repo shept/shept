@@ -3,7 +3,7 @@
 	<groupId>org.shept</groupId>
 	<artifactId>shept-core</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.2</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>Shept</name>
 	<url>http://shept.org</url>
 
@@ -147,7 +147,7 @@
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
-						<phase>deploy</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
