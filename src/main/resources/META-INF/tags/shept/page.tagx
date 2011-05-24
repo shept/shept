@@ -2,7 +2,7 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:shept-core="http://www.shept.org/tags/shept-core"
+	xmlns:shept="http://www.shept.org/tags/shept"
 	version="2.0"
 >
 
@@ -12,14 +12,14 @@
  	<!-- make childIndex a global variable for the request -->
 	<c:set var="childIndex" value="${childIndex}" scope="request" /> 
  	
-	<shept-core:variables />
-	<shept-core:debug />
+	<shept:variables />
+	<shept:debug />
 	
 	<c:if test="${isChildIndexValid}">
 	  <a name="a${childIndex}" ><!-- anchor --></a>
 		<jsp:invoke fragment="segment" />
 	  <!-- recursively call the next (subsequent) subForm if exists -->
-	  <shept-core:formWrapper childIndex="${childIndex + 1}" segment="${segment}" />
+	  <shept:page childIndex="${childIndex + 1}" segment="${segment}" />
 	</c:if>
 
 </jsp:root>

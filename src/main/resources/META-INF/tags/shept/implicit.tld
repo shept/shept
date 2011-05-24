@@ -8,98 +8,92 @@
 
 	<tlib-version>2.0</tlib-version>
 	<short-name>SheptCoreTaglib</short-name>
-	<uri>http://www.shept.org/tags/shept-core</uri>
+	<uri>http://www.shept.org/tags/shept</uri>
 	
 	<tag-file>
 		<description>
-			Confirm deletion of current row
+			General confirmation dialog
 		</description>
 		<name>confirmDialog</name>
-		<path>/META-INF/tags/shept-core/confirmDialog.tagx</path>
+		<path>/META-INF/tags/shept/confirmDialog.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
 			Include debug information on current page output
 		</description>
 		<name>debug</name>
-		<path>/META-INF/tags/shept-core/debug.tagx</path>
+		<path>/META-INF/tags/shept/debug.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Show page error
+			Show one error on the page
 		</description>
 		<name>error</name>
-		<path>/META-INF/tags/shept-core/error.tagx</path>
+		<path>/META-INF/tags/shept/error.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Show multiple errors
+			Show multiple errors on the page
 		</description>
 		<name>errors</name>
-		<path>/META-INF/tags/shept-core/errors.tagx</path>
+		<path>/META-INF/tags/shept/errors.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
 			Include a segment filter
 		</description>
 		<name>filter</name>
-		<path>/META-INF/tags/shept-core/filter.tagx</path>
+		<path>/META-INF/tags/shept/filter.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Include a simple form
+			Include a simple form segment
 		</description>
 		<name>form</name>
-		<path>/META-INF/tags/shept-core/form.tagx</path>
+		<path>/META-INF/tags/shept/form.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Form wrapper will dynamically include all required segments
-		</description>
-		<name>formWrapper</name>
-		<path>/META-INF/tags/shept-core/formWrapper.tagx</path>
-	</tag-file>
-	<tag-file>
-		<description>
-			Include JavaScripts to be used for shept
+			Include common JavaScript libs to be used for shept
 		</description>
 		<name>includeJavaScript</name>
-		<path>/META-INF/tags/shept-core/includeJavaScript.tagx</path>
+		<path>/META-INF/tags/shept/includeJavaScript.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Include rowVariables to be used in tables
+			Page wrapper to include all cascading segments.
+			This is the top-level form inclusion on a page.
 		</description>
-		<name>rowVariables</name>
-		<path>/META-INF/tags/shept-core/rowVariables.tagx</path>
+		<name>page</name>
+		<path>/META-INF/tags/shept/page.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
 			Embed your custom segments within subForms for outlining the contours of each segment
+			and supply controls for folding or closing the subform
 		</description>
 		<name>subForm</name>
-		<path>/META-INF/tags/shept-core/subForm.tagx</path>
+		<path>/META-INF/tags/shept/subForm.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Table
+			Default form submission
 		</description>
-		<name>table</name>
-		<path>/META-INF/tags/shept-core/table.tagx</path>
+		<name>submission</name>
+		<path>/META-INF/tags/shept/submission.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Include the table navigation-size and information elements usually
-			shown at the bottom of a table
+			Default search submission
 		</description>
-		<name>tableFooter</name>
-		<path>/META-INF/tags/shept-core/tableFooter.tagx</path>
+		<name>submitSearch</name>
+		<path>/META-INF/tags/shept/submitSearch.tagx</path>
 	</tag-file>
 	<tag-file>
 		<description>
-			Include form variables for use throughout a request
+			Include form variables for use in a subform
 		</description>
 		<name>variables</name>
-		<path>/META-INF/tags/shept-core/variables.tagx</path>
+		<path>/META-INF/tags/shept/variables.tagx</path>
 	</tag-file>
 </taglib>

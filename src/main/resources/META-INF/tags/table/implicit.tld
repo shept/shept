@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" 
+	version="2.1">
+
+	<tlib-version>2.0</tlib-version>
+	<short-name>SheptPagerTaglib</short-name>
+	<uri>http://www.shept.org/tags/table</uri>
+	
+	<tag-file>
+		<description>
+			Use blurInput to mark input fields for new rows as faded if the row path
+			equals the template (=is not yet edited by the user)
+		</description>
+		<name>blurInput</name>
+		<path>/META-INF/tags/table/blurInput.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Open a new chained segment that will be initialized from the current row
+		</description>
+		<name>chainRow</name>
+		<path>/META-INF/tags/table/chainRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Confirm deletion of one row
+		</description>
+		<name>confirmDeleteRow</name>
+		<path>/META-INF/tags/table/confirmDeleteRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Show a row status icon to mark transient (=new) and deleted rows
+		</description>
+		<name>iconRow</name>
+		<path>/META-INF/tags/table/iconRow.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Show an icon representing the available information about the pageHolder.
+			e.g. refreshDate, pageCount, rowCount.
+		</description>
+		<name>info</name>
+		<path>/META-INF/tags/table/info.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			The navi tag is usually placed at the bottom of the table rows to allow navigation
+			to the beginning and end of the list and page numbers for direct jumps
+		</description>
+		<name>navi</name>
+		<path>/META-INF/tags/table/navi.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include rowVariables to be used in tables. Inside a table row these variables provide
+			information about the rowObject, rowStatus, rowPath, rowPathId (for javascript), optionPath
+		</description>
+		<name>rowVariables</name>
+		<path>/META-INF/tags/table/rowVariables.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			The size element allows resizing of the number of rows visible.
+			It is usually placed right to navi tag.
+		</description>
+		<name>size</name>
+		<path>/META-INF/tags/table/size.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			The sort tag enables sorting for the marked columns. It is meant to be included
+			in the column header denoting the column either by name or message-code (i18).
+			It adds an icon to indicate up-/down sorting capability.
+		</description>
+		<name>sort</name>
+		<path>/META-INF/tags/table/sort.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include a table in the subform with 3 distinct elements:
+			- header with table header elements (including column sorting)
+			- row element to represent exactly one row. Inside the row you have all rowVariables available 
+			- submission form form submission and refresh
+		</description>
+		<name>table</name>
+		<path>/META-INF/tags/table/table.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
+			Include the table navigation-size and information elements usually
+			shown at the bottom of a table
+		</description>
+		<name>tableFooter</name>
+		<path>/META-INF/tags/table/tableFooter.tagx</path>
+	</tag-file>
+</taglib>

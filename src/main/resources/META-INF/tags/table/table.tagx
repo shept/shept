@@ -4,7 +4,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:pager="http://www.shept.org/tags/pager"
-	xmlns:shept-core="http://www.shept.org/tags/shept-core"
+	xmlns:table="http://www.shept.org/tags/table"
 	version="2.0"
 >
 
@@ -57,20 +57,20 @@
 			varStatus="rowStatus"
 		>
 			<!-- make rowVariables available to all included pages -->
-			<shept-core:rowVariables rowObject="${rowObject}" rowStatus="${rowStatus}" >
+			<table:rowVariables rowObject="${rowObject}" rowStatus="${rowStatus}" >
 				<!-- switch to the rowObjects path to allow for simple bind names -->
 				<spring:nestedPath path="${rowPath}">
 					<jsp:invoke fragment="tabRow" />
  				</spring:nestedPath>
-			</shept-core:rowVariables>
+			</table:rowVariables>
 		</c:forEach>
 		</tbody>
 	  </table>
 	  
 	  <div>
-  		<shept-core:tableFooter >
+  		<table:tableFooter >
   			<jsp:doBody />
-		</shept-core:tableFooter>
+		</table:tableFooter>
 	  </div>
 	  <div class="sheptClear">
 	  	<!-- comment -->
