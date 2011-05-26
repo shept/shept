@@ -52,6 +52,7 @@
 		<property name="interceptors">
 		<list>
 			<bean class="org.shept.org.springframework.web.servlet.mvc.interceptors.FormCompletionInterceptor" />
+			<bean class="org.shept.org.springframework.web.servlet.mvc.interceptors.ManifestExposureInterceptor" />
 			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 		</list>
 		</property>
