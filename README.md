@@ -14,7 +14,7 @@ Read more in the [Feature documentation][features]
 
 Look at the [Online examples][demos]
 
-Shept-core is also available from the Maven repositories.
+Shept-core is also available from the [Maven repositories][maven].
 
 Shept implementation basics
 ===========================
@@ -36,6 +36,8 @@ Infrastructure provisions
 
 Follow the [Getting started documentation][getting started]
 
+Read more about [Spring integration][spring integration] and [Hibernate integration][hibernate integration}
+
 Shept History
 =============
 
@@ -44,11 +46,11 @@ shept has been made available in early 2011 as a separate library under Apache 2
 
 Shept is short for
 
-* *S*pring
-* *H*ibernate
-* *E*clipse
-* *P*ostgres
-* *T*omcat
+* Spring
+* Hibernate
+* Eclipse
+* Postgres
+* Tomcat
 
 While Eclipse, Postgres and Tomcat are not mandatory parts we are referring to those environments in the documentation and the examples.
 
@@ -56,3 +58,6 @@ While Eclipse, Postgres and Tomcat are not mandatory parts we are referring to t
 [demos]: http://shept.org/docs/Demos/
 [getting started]: http://shept.org/docs/Demo1/
 [icons]: http://www.famfamfam.com/lab/icons/silk/
+[maven]: http://search.maven.org/#search|ga|1|shept
+[spring integration]: http://shept.org/docs/Reference/Spring+Integration
+[hibernate integration]: http://shept.org/docs/Reference/Hibernate+Integration

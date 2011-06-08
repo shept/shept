@@ -16,6 +16,7 @@
 
 package org.shept.org.springframework.web.bind.support;
 
+import org.shept.org.springframework.web.servlet.mvc.delegation.ComponentUtils;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,9 +29,24 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ComponentPostprocessor {
 
 	/**
-	 * Initialize the given DataBinder for the given request.
-	 * @param binder the DataBinder to initialize
+	 * Initialize a Postprocessor for the given request.
+	 * Typical use cases are population of selection options
+	 * or showing aggregations of the list (sums of elements, totals, ...)
+	 * An implementation can retrieve the segment from the componentPath
+	 * example:
+	 * <code>
+	 * PageableList<SomeEntity> list = (PageableList<SomeEntity>) ComponentUtils.getComponent(modelAndView, componentPath);
+	 * // finally contribute to modelAndView
+	 * if (modelAndView != null) { // should be checked because the same segment may occur multiple times
+	 *	modelAndView("someName", someObject);
+	 * }
+	 * </code>
+	 * 
+	 * There are lots of examples in the shept demo implementations.
+	 * Postprocessors should usually be located in the ../web/controller/postprocessors package of your app.
+	 * 
 	 * @param request the web request that the data binding happens within
+	 * @param modelAndView the ModelAndView
 	 * @param componentPath the path within the bound object
 	 */
 	void postHandle(WebRequest request, ModelAndView modelAndView, String componentPath );

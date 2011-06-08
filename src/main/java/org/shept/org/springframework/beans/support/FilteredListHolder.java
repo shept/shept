@@ -33,48 +33,10 @@ import org.springframework.dao.support.DaoSupport;
  * It automatically re-requests the List from the source provider, in case of Locale or
  * filter or sort changes.
  * 
- * It is very similar as the RefreshablePagedListHolder but in contrast it can read portions of the query
+ * It is very similar as springs RefreshablePagedListHolder (no longer available as of spring 3.x) but in contrast it can read portions of the query
  * from the database so large amount of data are not a problem. It also rereads the database
  * when changes in sorting occur. 
  *
- * <p>Data binding works just like with PagedListHolder. The locale can be specified in
- * Locale's toString syntax, e.g. "locale=en_US". The filter object can be of any
- * custom class, preferably a bean for easy data binding from a request. An instance
- * will simply get passed through to PagedListSourceProvider.loadList. A filter property
- * can be specified via "filter.myFilterProperty", for example.
- *
- * <p>The scenario in the controller could be:
- * <code>
- * FilteredListHolder holder = request.getSession("mySessionAttr");<br>
- * if (holder == null) {<br>
- *   holder = new FilteredListHolder();<br>
- *   holder.setSourceProvider(new MyAnonymousOrEmbeddedSourceProvider());<br>
- *   holder.setFilter(new MyAnonymousOrEmbeddedFilter());<br>
- *   request.getSession().setAttribute("mySessionAttr", holder);<br>
- * }<br>
- * holder.refresh(false);
- * BindException ex = BindUtils.bind(request, listHolder, "myModelAttr");<br>
- * return ModelAndView("myViewName", ex.getModel());<br>
- * <br>
- * ...<br>
- * <br>
- * private class MyAnonymousOrEmbeddedSourceProvider implements DatabasePagedListSourceProvider {<br>
- *   public List loadList(Locale locale, Object filter) {<br>
- *     MyAnonymousOrEmbeddedFilter filter = (MyAnonymousOrEmbeddedFilter) filter;<br<
- *     // an empty name mask should lead to all objects being loaded
- *     return myBusinessService.loadMyObjectsByNameMask(filter.getName());<br>
- * }<br>
- * <br>
- * private class MyAnonymousOrEmbeddedFilter {<br>
- *   private String name = "";<br>
- *   public String getName() {<br>
- *     return name;<br<
- *   }<br>
- *   public void setName(String name) {<br>
- *     this.name = name;<br>
- *   }<br>
- * }<br>
- * </code>
  *
  * @see org.springframework.beans.support.PagedListSourceProvider
  * @see org.springframework.beans.propertyeditors.LocaleEditor
