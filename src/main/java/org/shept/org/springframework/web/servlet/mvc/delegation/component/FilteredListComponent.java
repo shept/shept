@@ -17,9 +17,9 @@
 package org.shept.org.springframework.web.servlet.mvc.delegation.component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,10 +28,6 @@ import org.shept.org.springframework.beans.support.PageableList;
 import org.shept.org.springframework.beans.support.Refreshable;
 import org.shept.org.springframework.web.bind.support.ComponentDataBinder;
 import org.shept.org.springframework.web.servlet.mvc.delegation.ComponentToken;
-import org.shept.util.JarUtils;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.dao.support.DaoSupport;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,8 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  */
 public class FilteredListComponent extends AbstractComponent implements WebComponent {
-
-	protected DaoSupport dao;
+	
+	protected int newModelSize = PageableList.DEFAULT_NEW_MODEL_SIZE;
 
 	public ModelAndView excecuteAction(HttpServletRequest request,
 			HttpServletResponse response, ComponentToken token) throws Exception {
@@ -87,7 +83,19 @@ public class FilteredListComponent extends AbstractComponent implements WebCompo
 				return modelWithErrors(binder);
 			}
 			pagedList.setPage(0);
-			filter.refresh(getDao());
+			filter.refresh();
+			return modelRedirectClip(request, token);
+			
+		} else if (method.equals("onAddTransient")) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Add transient model(s): " + token.toString());
+			}
+			int savedSize = pagedList.getNewModelSize();
+			pagedList.setNewModelSize(newModelSize);
+			List src = pagedList.getSource();
+			pagedList.setSource(src);
+			pagedList.setPage(0);
+			pagedList.setNewModelSize(savedSize);
 			return modelRedirectClip(request, token);
 
 		} 		
@@ -96,8 +104,9 @@ public class FilteredListComponent extends AbstractComponent implements WebCompo
 
 	public Map<String, String> getDefaultMappings() {
 		Map<String, String> mappings = new HashMap<String, String>();
-		mappings.put("submitFilter", "onFilter");						// applies the values of the FilterDefinition and reloads the page data
+		mappings.put("submitFilter", "onFilter");				// applies the values of the FilterDefinition and reloads the page data
 		mappings.put("submitFilterReset", "onFilterCancel");	// resets the filter definition to the original state or in case of errors to the state before the error
+		mappings.put("submitAddTransient", "onAddTransient");	// adds one transient model in front of all others
 		return mappings;
 	}
 
@@ -107,18 +116,17 @@ public class FilteredListComponent extends AbstractComponent implements WebCompo
 	}
 
 	/**
-	 * @return the dao
+	 * @return the newModelSize
 	 */
-	public DaoSupport getDao() {
-		return dao;
+	public int getNewModelSize() {
+		return newModelSize;
 	}
 
 	/**
-	 * @param dao the dao to set
+	 * @param newModelSize the newModelSize to set
 	 */
-	@Resource
-	public void setDao(DaoSupport dao) {
-		this.dao = dao;
+	public void setNewModelSize(int newModelSize) {
+		this.newModelSize = newModelSize;
 	}
 
 }

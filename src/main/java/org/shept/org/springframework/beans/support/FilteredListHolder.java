@@ -279,9 +279,7 @@ public class FilteredListHolder<E> extends  ChoiceListHolder<E> implements Refre
 		 */
 		@Override
 		public void setSource(List<E> source) {
-			SortDefinition sortUsed = this.sortUsed;
 			super.setSource(source);
-			this.sortUsed = sortUsed;
 		}
 
 		/**
