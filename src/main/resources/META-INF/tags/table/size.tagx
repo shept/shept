@@ -66,8 +66,8 @@
 		</label>
 		<select  
 			name="${status.expression}.pageSize" 
-			id="${status.expression}.pageSize" 
-			onChange="document.getElementById('${status.expression}.pageResize').click()" >
+			id="${commandPathId}_pageSize" 
+			onChange="document.getElementById('${commandPathId}_pageResize').click()" >
 			<c:forTokens items="${sizeList}" delims="," var="curPagSize">
 				<c:choose>
 					<c:when test="${curPagSize lt pageHolderObject.pageSize}">
@@ -95,8 +95,8 @@
 				</c:choose>
 			</c:forTokens>
 		</select>
-		<input type="submit" value="Resize"  
-			id="${status.expression}.pageResize" name="${status.expression}.pageResize" />
+		<input type="submit" value="Resize"
+			id="${commandPathId}_pageResize" name="${status.expression}.pageResize" />
 	</div>
 	
 </spring:bind>

@@ -3,13 +3,13 @@
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:pager="http://www.shept.org/tags/pager"
 	xmlns:table="http://www.shept.org/tags/table"
 	version="2.0"
 >
 
 	<jsp:directive.attribute name="tabHeader" fragment="true" required="true" />
 	<jsp:directive.attribute name="tabRow" fragment="true" required="true" />
+	<jsp:directive.attribute name="tabFooter" fragment="true" />
 	<jsp:directive.attribute name="tabSubmit" fragment="true" />
 
 	<jsp:directive.attribute name="cssClass" required="false"/>
@@ -30,8 +30,8 @@
 		<c:set var="rowTemplate" value="${status.value}" scope="request" />	
 	</spring:bind>	
 
-	<div>
-	  <table class="sheptTable ${cssClass}" >
+	<div class="sheptTable ${cssClass}" >
+	  <div><table >
 	  	<thead>
 			<jsp:invoke fragment="tabHeader" />
 		</thead>
@@ -65,16 +65,25 @@
 			</table:rowVariables>
 		</c:forEach>
 		</tbody>
-	  </table>
-	  
-	  <div>
-  		<table:tableFooter >
-  			<jsp:doBody />
-		</table:tableFooter>
+	  </table></div>
+
+	  <div>	  
+	  	<c:choose>
+	  		<c:when test="${not empty tabFooter}" >
+				<jsp:invoke fragment="tabFooter" />
+	  		</c:when>
+	  		<c:otherwise>
+				<table:tableFooter >
+					<jsp:doBody />
+				</table:tableFooter>
+	  		</c:otherwise>
+	  	</c:choose>
 	  </div>
+
 	  <div class="sheptClear">
 	  	<!-- comment -->
 	  </div>
+
 	  <c:if test="${not empty tabSubmit}" >
 	  	<div>
 			<jsp:invoke fragment="tabSubmit" />
