@@ -12,7 +12,7 @@
 	<div class="sheptFormSubmission">
 		<c:if test="${empty disabled or not disabled}" >
 			<div class="sheptSubmitSave" >
-				<spring:message var="txtLabel" code="Persist.save" />
+				<spring:message var="txtLabel" code="persist.save" />
  				<input
 					type="image"
 					src="${images}/persist/accept.png"
@@ -23,7 +23,7 @@
 			</div>
 		</c:if>
 		<div class="sheptSubmitRefresh" >
-			<spring:message var="txtLabel" code="Persist.refresh" />
+			<spring:message var="txtLabel" code="persist.refresh" />
  			<input
 				type="image"
 				src="${images}/persist/refresh.png"

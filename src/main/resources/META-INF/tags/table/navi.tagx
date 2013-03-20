@@ -44,7 +44,7 @@
 				Default extension is *.png which can be changed by 'imageExt'-attribute
 				Default image dir is contextPath/images/pager and can be changed by 'imageDir'-attribute
 
-	Message (I18): PageableList.firstPage, PageableList.lastPage, PageableList.nextPage, PageableList.previousPage
+	Message (I18): pageableList.firstPage, pageableList.lastPage, pageableList.nextPage, pageableList.previousPage
 	-->
 
 
@@ -61,17 +61,17 @@
 
 	<fmt:bundle basename="org.shept.resources.i18n.messages" >
 
-		<fmt:message key="PageableList.firstPage" var="pager_firstPage" />
-		<spring:message var="pager_firstPage" code="PageableList.firstPage" text="${pager_firstPage}" />
+		<fmt:message key="pageableList.firstPage" var="pager_firstPage" />
+		<spring:message var="pager_firstPage" code="pageableList.firstPage" text="${pager_firstPage}" />
 
-		<fmt:message key="PageableList.lastPage" var="pager_lastPage" />
-		<spring:message var="pager_lastPage" code="PageableList.lastPage" text="${pager_lastPage}" />
+		<fmt:message key="pageableList.lastPage" var="pager_lastPage" />
+		<spring:message var="pager_lastPage" code="pageableList.lastPage" text="${pager_lastPage}" />
 
-		<fmt:message key="PageableList.nextPage" var="pager_nextPage" />
-		<spring:message var="pager_nextPage" code="PageableList.nextPage" text="${pager_nextPage}" />
+		<fmt:message key="pageableList.nextPage" var="pager_nextPage" />
+		<spring:message var="pager_nextPage" code="pageableList.nextPage" text="${pager_nextPage}" />
 
-		<fmt:message key="PageableList.previousPage" var="pager_previousPage" />
-		<spring:message var="pager_previousPage" code="PageableList.previousPage" text="${pager_previousPage}" />
+		<fmt:message key="pageableList.previousPage" var="pager_previousPage" />
+		<spring:message var="pager_previousPage" code="pageableList.previousPage" text="${pager_previousPage}" />
 	</fmt:bundle>
 
 <div class="${not empty cssClass ? cssClass : 'shept_pager_navi'}">

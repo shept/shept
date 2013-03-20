@@ -7,9 +7,9 @@
 	version="2.0"
 >
 
-	<spring:message var="txtLabel" code="Persist.delete" />
-	<spring:message var="buttonOkLabel" code="Persist.yes" />
-	<spring:message var="buttonCancelLabel" code="Persist.no" />
+	<spring:message var="txtLabel" code="persist.delete" />
+	<spring:message var="buttonOkLabel" code="persist.yes" />
+	<spring:message var="buttonCancelLabel" code="persist.no" />
 
 	<shept:includeJavaScript />
 

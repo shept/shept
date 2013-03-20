@@ -49,6 +49,14 @@
 	</tag-file>
 	<tag-file>
 		<description>
+			textual information about the pageHolder.
+			e.g. refreshDate, pageCount, rowCount.
+		</description>
+		<name>infoText</name>
+		<path>/META-INF/tags/table/infoText.tagx</path>
+	</tag-file>
+	<tag-file>
+		<description>
 			The navi tag is usually placed at the bottom of the table rows to allow navigation
 			to the beginning and end of the list and page numbers for direct jumps
 		</description>

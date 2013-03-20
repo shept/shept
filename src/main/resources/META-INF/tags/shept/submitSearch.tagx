@@ -9,7 +9,7 @@
 
 	<div class="sheptFormSubmission">
 		<div class="sheptSubmitFilter" >
-			<spring:message var="txtLabel" code="Filter.find" />
+			<spring:message var="txtLabel" code="filter.find" />
  			<input
 				type="image"
 				src="${images}/filter/magnifier.png"
@@ -19,7 +19,7 @@
 			/>
 		</div>
 		<div class="sheptSubmitFilterReset" >
-			<spring:message var="txtLabel" code="Filter.reset" />
+			<spring:message var="txtLabel" code="filter.reset" />
  			<input
 				type="image"
 				src="${images}/filter/magnifier_zoom_out.png"

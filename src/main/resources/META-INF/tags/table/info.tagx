@@ -4,6 +4,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:table="http://www.shept.org/tags/table"
 	version="2.0"
 >
 	<jsp:directive.attribute name="pageHolder" 
@@ -39,43 +40,11 @@
 		<c:set var="imageExt" value="png" />
 	</c:if>
 
-
+	<c:set var="txtInfo">
+		<table:infoText />
+	</c:set>
 	<div class="${not empty cssClass ? cssClass : 'shept_pager_info'}" >
-
-		<!--  use dateStyle="short" and type="both" if a date should also be shown -->
-		<fmt:formatDate var="txtInfoDate" value="${pageHolderObject.refreshDate}" type="time" timeStyle="medium" />
-
-		<fmt:bundle basename="org.shept.resources.i18n.messages" >
-			<fmt:message key="PageableList.refresh" var="txtLabel" />
-			<fmt:message key="PageableList.pages" var="txtInfoPages" >
-				<fmt:param value="${pageHolderObject.page + 1}" />
-				<fmt:param value="${pageHolderObject.pageCount}" />
-				<fmt:param value="${pageHolderObject.eol ? '' : '+'}" />
-			</fmt:message>
-			<fmt:message key="PageableList.records" var="txtInfoRecords">
-				<fmt:param value="${pageHolderObject.firstElementOnPage + 1}" />
-				<fmt:param value="${pageHolderObject.lastElementOnPage + 1}" />
-				<fmt:param value="${pageHolderObject.nrOfElements}" />
-				<fmt:param value="${pageHolderObject.eol ? '' : '+'}" />
-			</fmt:message>
-		</fmt:bundle>
-	
-		<spring:message var="txtInfoDateLabel" code="PageableList.refresh" text="${txtLabel}" />
-
-		<spring:message var="txtInfoPages" code="PageableList.pages" text="${txtInfoPages}"
-			arguments="${pageHolderObject.page + 1}, ${pageHolderObject.pageCount}, ${pageHolderObject.eol ? '' : '+'}" >
-		</spring:message>
-
-		<spring:message var="txtInfoRecords" code="PageableList.records" text="${txtInfoRecords}"
-			arguments="${pageHolderObject.firstElementOnPage + 1},
-			 	${pageHolderObject.lastElementOnPage + 1},
-		 		${pageHolderObject.nrOfElements},
-			 	${pageHolderObject.eol ? '' : '+'} " >
-		</spring:message>
-	
-		<c:set var="txtInfo" value="${txtInfoDateLabel}: ${txtInfoDate} | ${txtInfoPages} | ${txtInfoRecords} "/>
 		<img src="${imageDir}/information.${imageExt}" alt="${txtInfo}" title="${txtInfo}" />
-
 	</div>
 </spring:bind>
 

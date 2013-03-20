@@ -56,8 +56,8 @@
 	<c:set var="pageHolderObject" value="${status.value}" />
 
 	<fmt:bundle basename="org.shept.resources.i18n.messages" >
-		<fmt:message key="PageableList.size" var="txtSize" />
-		<spring:message var="txtSize" code="PageableList.size" text="${txtSize}" />
+		<fmt:message key="pageableList.size" var="txtSize" />
+		<spring:message var="txtSize" code="pageableList.size" text="${txtSize}" />
 	</fmt:bundle>
 
 	<div class="${not empty cssClass ? cssClass : 'shept_pager_size'}" >
