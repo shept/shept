@@ -3,7 +3,7 @@
 	<groupId>org.shept</groupId>
 	<artifactId>shept-core</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<name>Shept</name>
 	<url>http://shept.org</url>
 
