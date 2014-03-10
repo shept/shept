@@ -2,6 +2,7 @@
 1.0.4
 =====
 		wepapp META-INF/MANIFEST.MF exposed to request by default
+		Fix compatibility issues with JDK 7
 		
 1.0.3
 =====

@@ -29,7 +29,11 @@ public class ModelObjectChecker {
 		this.object = anObject;
 	}
 	
-	public boolean isDeleted() {
+	/**
+	 * NOTE ! As of Java7 these accessors may NOT be named as reserved words 
+	 * (i.e. 'isTransient' is NOT a valid name that can be references by expression language) 
+	 */
+	public boolean isDel() {
 		try {
 			return ((ModelDeletion) object).isDeleted();
 		} catch (Exception ex) {
@@ -37,7 +41,11 @@ public class ModelObjectChecker {
 		}
 	}
 	
-	public boolean isTransient() {
+	/**
+	 * NOTE ! As of Java7 these accessors may NOT be named as reserved words 
+	 * (i.e. 'isTransient' is NOT a valid name that can be references by expression language) 
+	 */
+	public boolean isTrans() {
 		try {
 			return ((ModelCreation) object).isTransient();
 		} catch (Exception ex) {

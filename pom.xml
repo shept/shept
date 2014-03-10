@@ -3,9 +3,15 @@
 	<groupId>org.shept</groupId>
 	<artifactId>shept-core</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<name>Shept</name>
 	<url>http://shept.org</url>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
 	<description>
 		Shept is an add-on to spring-mvc to allow 4GL alike definitions of table-driven
@@ -39,19 +45,6 @@
 			</roles>
       		<timezone>+1</timezone>
 		</developer>
-
-		<developer>
-			<id>gka</id>
-			<name>Gerno Kaufmann</name>
-			<email>gka@shept.org</email>
-			<organization>Shept</organization>
-			<organizationUrl>http://shept.org/</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-      		<timezone>+1</timezone>
-		</developer>
-
 	</developers>
 
 	<distributionManagement>

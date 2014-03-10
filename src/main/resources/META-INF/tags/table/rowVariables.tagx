@@ -25,10 +25,10 @@
 		<jsp:setProperty name="objectChecker" property="object" value="${rowObject}" />
 	</jsp:useBean>
 
-	<!-- check if rowObject is a new instance. -->
-	<c:set var="isTransient" value="${objectChecker.transient}" scope="request" />
+	<!-- check if rowObject is a new instance. Renamed from 'transient' to 'trans' because 'transient' is keyword !-->
+	<c:set var="isTransient" value="${objectChecker.trans}" scope="request" />
 	<!-- check row object for deletion -->
-	<c:set var="isDeleted" value="${objectChecker.deleted}" scope="request" />
+	<c:set var="isDeleted" value="${objectChecker.del}" scope="request" />
 
 	<!-- set the default row class even / odd - new row / ... -->
 	<c:set var="rowClassDefault" value=
