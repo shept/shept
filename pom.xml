@@ -3,7 +3,7 @@
 	<groupId>org.shept</groupId>
 	<artifactId>shept-core</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	<name>Shept</name>
 	<url>http://shept.org</url>
 
@@ -132,7 +132,8 @@
 					</execution>
 				</executions>
         	</plugin>
- 
+
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -140,7 +141,6 @@
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
-<!-- 						<phase>deploy</phase> -->
 						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
@@ -148,6 +148,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 
 		</plugins>
 	</build>
@@ -190,27 +191,6 @@
     		<artifactId>spring-webmvc</artifactId>
     		<version>${org.springframework.version}</version>
     	</dependency>
-		
-		<dependency>
-		    <groupId>javax.el</groupId>
-		    <artifactId>el-api</artifactId>
-		    <version>1.0</version>
-		    <scope>provided</scope>
-		</dependency>
-
-		<dependency>
-    		<groupId>jstl</groupId>
-    		<artifactId>jstl</artifactId>
-    		<version>1.1.2</version>
-		    <scope>provided</scope>
-		</dependency>
-
-		<dependency>
-    		<groupId>taglibs</groupId>
-    		<artifactId>standard</artifactId>
-    		<version>1.1.2</version>
-		    <scope>provided</scope>
-		</dependency>
 
 		<dependency>
 		    <groupId>javax.servlet</groupId>
@@ -218,7 +198,7 @@
 		    <version>2.5</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>javax.servlet.jsp</groupId>
 		    <artifactId>jsp-api</artifactId>
@@ -252,8 +232,8 @@
 		
 		<dependency>
     		<groupId>javax.persistence</groupId>
-    		<artifactId>persistence-api</artifactId>
-    		<version>1.0</version>
+    		<artifactId>javax.persistence-api</artifactId>
+    		<version>2.2</version>
 		</dependency>
 		
 	</dependencies>

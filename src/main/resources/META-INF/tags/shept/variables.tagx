@@ -39,9 +39,13 @@
 			<c:set var="componentProperties" value="${status.value}" scope="request" />
 		</spring:bind>
 
-		<!-- This is the commandPath to be used in tags -->
 		<c:set var="commandPath" value="${commandPath}.command" scope="request" />
-		
+
+		<!-- This is the commandPath to be used in tags -->
+		<c:set var="commandPathUrl" value="${commandPath}" scope="request"/>
+		<c:set var="commandPathUrl" value = "${fn:replace(commandPathUrl, '[', '%5B')}" scope="request"/>
+		<c:set var="commandPathUrl" value = "${fn:replace(commandPathUrl, ']', '%5D')}" scope="request"/>
+
 		<spring:bind path="${commandName}.${commandPath}" >
 			<c:set var="subCommand" value="${status.value}" scope="request" />
 		</spring:bind>
