@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+    	<org.springframework.version>5.5.7</org.springframework.version>
 		<org.hibernate.version>3.6.4.Final</org.hibernate.version>
   	</properties>
 	
